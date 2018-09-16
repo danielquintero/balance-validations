@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {parseString, Parser, OptionsV2} from 'xml2js';
+import {Parser} from 'xml2js';
 import {ReadFile} from '@rabo/file/file.model';
 import {Observable, of} from 'rxjs';
 import {MT940} from '@rabo/file/MT940.model';
@@ -32,26 +32,28 @@ export class ParserService {
 					if (err) {
 						throw err;
 					}
-					const {record}: {record: any[]} = result.records;
-					const arr: MT940[] = [];
-					for (let j = 0; j < record.length; j++) {
-						arr.push({
-							reference: record[j].$.reference,
-							accountNumber: record[j].accountNumber,
-							description: record[j].description,
-							startBalance: record[j].startBalance,
-							endBalance: record[j].endBalance,
-							mutation: record[j].mutation
-						});
-					}
-					parsed.push(...arr);
+					parsed.push(...this.xml2MT940(result));
 				});
 			}
 		}
 		return of(parsed);
 	}
 
-	private xmlJs() {}
+	private xml2MT940(result): MT940[] {
+		const {record}: {record: any[]} = result.records;
+		const arr: MT940[] = [];
+		for (let j = 0; j < record.length; j++) {
+			arr.push({
+				reference: record[j].$.reference,
+				accountNumber: record[j].accountNumber,
+				description: record[j].description,
+				startBalance: record[j].startBalance,
+				endBalance: record[j].endBalance,
+				mutation: record[j].mutation
+			});
+		}
+		return arr;
+	}
 
 	private csvJs(csvText: string) {
 		const lines = csvText.split('\n');
