@@ -16,6 +16,14 @@
     "lib": [
       "es2017",
       "dom"
-    ]
+    ],
+    "paths": {
+      "stream": [
+        "node_modules/readable-stream"
+      ],
+      "@rabo/file/*": [
+        "src/app/file/*"
+      ]
+    }
   }
 }
