@@ -1,5 +1,5 @@
 import {Observable, Observer, forkJoin, from} from 'rxjs';
-import {ReadFile} from './file.model';
+import {ReadFile} from '@rabo/file/file.model';
 import {mergeMap} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 

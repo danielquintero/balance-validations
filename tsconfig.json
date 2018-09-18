@@ -23,6 +23,12 @@
       ],
       "@rabo/file/*": [
         "src/app/file/*"
+      ],
+      "@rabo/data/*": [
+        "src/app/data/*"
+      ],
+      "@rabo/shared/*": [
+        "src/app/shared/*"
       ]
     }
   }

@@ -1,5 +1,5 @@
 import {cold, hot} from 'jasmine-marbles';
-import {FileReaderService} from '@rabo/file/file-reader.service';
+import {FileReaderService} from '@rabo/file/reader/file-reader.service';
 
 describe('FileReaderService', () => {
 	let component: FileReaderService;

@@ -1,10 +1,15 @@
 import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
-import {Observable} from 'rxjs';
-import {FileReaderService} from '@rabo/file/file-reader.service';
+import {Observable, Subscription} from 'rxjs';
+import {FileReaderService} from '@rabo/file/reader/file-reader.service';
 import {tap, take, mergeMap} from 'rxjs/operators';
 import {ParserService} from '@rabo/file/parser/parser.service';
-import {MT940} from '@rabo/file/MT940.model';
+import {MT940} from '@rabo/file/statement.model';
 import {ReadFile} from '@rabo/file/file.model';
+import {Store, select} from '@ngrx/store';
+import * as fromFile from '@rabo/file/store/reducers/file.reducer';
+import * as fromRoot from '../../reducers';
+import {FileActions} from '@rabo/file/store/actions';
+import {MatSnackBar} from '@angular/material';
 
 type ReadAsText = string | ArrayBuffer | null;
 @Component({
@@ -13,32 +18,37 @@ type ReadAsText = string | ArrayBuffer | null;
 	styleUrls: ['./file-uploader.component.css']
 })
 export class FileUploaderComponent implements OnInit {
+	public files$: Observable<ReadFile[]>;
+	public error$: Observable<string>;
 	@ViewChild('uploader')
-	private uploader: ElementRef<HTMLInputElement>;
-	private files: ReadFile[];
+	public uploader: ElementRef<HTMLInputElement>;
 
-	constructor(private parserService: ParserService, private fileReaderService: FileReaderService) {}
+	private subscriptions: Subscription;
+
+	constructor(private store: Store<fromRoot.State>, private snackBar: MatSnackBar) {}
 
 	public ngOnInit() {
-		this.files = [];
+		this.init();
+		this.subscriptions.add(
+			this.error$.subscribe((err: string) => {
+				if (err) {
+					this.snackBar.open(err);
+				}
+			})
+		);
 	}
 
 	public uploadFiles() {
-		let fileSource$: Observable<ReadFile[]>;
 		this.uploader.nativeElement.onchange = () => {
-			fileSource$ = this.fileReaderService.readFilesAsArray(this.uploader.nativeElement.files);
-			fileSource$
-				.pipe(
-					take(1),
-					tap((values) => (this.files = values)),
-					tap((values) => console.log('Before parsed', values)),
-					mergeMap((files: ReadFile[]) => this.parserService.parse(files)),
-					tap((values) => console.log('After parsed', values))
-				)
-				.subscribe((MT940Complient: MT940[]) => {
-					// disptach UPLOAD_FILES with the parsed, validated object files
-				});
+			const {files} = this.uploader.nativeElement;
+			this.store.dispatch(new FileActions.Upload(files));
 		};
 		this.uploader.nativeElement.click();
+	}
+
+	private init() {
+		this.subscriptions = new Subscription();
+		this.files$ = this.store.pipe(select(fromRoot.getFiles));
+		this.error$ = this.store.pipe(select(fromRoot.getUploadError));
 	}
 }

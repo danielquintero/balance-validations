@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Parser} from 'xml2js';
 import {ReadFile} from '@rabo/file/file.model';
 import {Observable, of} from 'rxjs';
-import {MT940} from '@rabo/file/MT940.model';
+import {MT940} from '@rabo/file/statement.model';
 
 @Injectable({
 	providedIn: 'root'
@@ -59,6 +59,9 @@ export class ParserService {
 		const lines = csvText.split('\n');
 		const result: MT940[] = [];
 		const headers = lines[0].split(',');
+		headers.forEach((header: string, index: number, iteratee: string[]) => {
+			iteratee[index] = this.camelize(header);
+		});
 
 		for (let i = 1; i < lines.length - 1; i++) {
 			const obj = {} as MT940;
@@ -71,5 +74,14 @@ export class ParserService {
 		}
 
 		return result;
+	}
+
+	private camelize(str) {
+		return str.replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, function(match, index) {
+			if (+match === 0) {
+				return '';
+			}
+			return index === 0 ? match.toLowerCase() : match.toUpperCase();
+		});
 	}
 }

@@ -6,13 +6,15 @@ import {
 	MatTableModule,
 	MatToolbarModule,
 	MatIconModule,
-	MatChipsModule
+	MatChipsModule,
+	MatSnackBarModule
 } from '@angular/material';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 
 export const ANGULAR_SHARED_MODULES = [
+	MatSnackBarModule,
 	MatChipsModule,
 	MatButtonModule,
 	MatIconModule,

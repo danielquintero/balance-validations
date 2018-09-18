@@ -1,15 +1,17 @@
-<mat-toolbar color="primary">
-  <span fxFlex></span>
-  <h1>
-      {{ title }}
-  </h1>
-  <span fxFlex></span>  
-</mat-toolbar>
 <div fxLayout="column" fxLayoutAlign="start start">
-  <div class="RCSP_box" fxLayout="row" fxFlexFill>
-    <app-file-uploader></app-file-uploader>
-  </div>
-  <div class="RCSP_box" fxLayout="row" fxFlexFill>
-    <app-file-uploader></app-file-uploader>
+  <mat-toolbar color="primary">
+    <span fxFlex></span>
+    <h1>
+      {{ title }}
+    </h1>
+    <span fxFlex></span>
+  </mat-toolbar>
+  <div class="RCSP_body" fxLayout="column" fxFlex="100">
+    <div class="RCSP_box" fxLayout="row" fxFlexFill>
+      <app-file-uploader></app-file-uploader>
+    </div>
+    <div class="RCSP_box" fxLayout="row" fxFlexFill>
+      <app-data-table></app-data-table>
+    </div>
   </div>
 </div>

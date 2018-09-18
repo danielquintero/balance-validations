@@ -1,16 +1,20 @@
-<div fxLayout="row" fxFlexFill fxLayoutAlign="start start" fxLayoutGap="5px">
-  <div fxFlex="20">
-    <button mat-icon-button (click)="uploadFiles()">
-      <mat-icon aria-label="Upload">file_upload</mat-icon>
-    </button>
-    Upload files
+<mat-card>
+  <div fxLayout="row" fxFlexFill fxLayoutAlign="start start" fxLayoutGap="5px">
+    <div fxFlex="20">
+      <button mat-icon-button (click)="uploadFiles()">
+        <mat-icon aria-label="Upload">file_upload</mat-icon>
+      </button>
+      Upload files
+    </div>
+    <div fxLayout="row" fxFlex="20" style="height: 40px;" fxLayoutAlign="center center">
+      <span class="mat-caption">{{(files$|async)?.length > 0 ? 'Loaded files: ' : 'No files selected.'}}</span>
+      <span fxFlex="5"></span>
+      <mat-chip-list>
+        <mat-chip *ngFor="let item of (files$|async)">
+          {{item.name}}
+        </mat-chip>
+      </mat-chip-list>
+    </div>
   </div>
-  <div fxLayout="row" fxFlex="20" fxLayoutAlign="start start">
-    <mat-chip-list>
-      <mat-chip *ngFor="let item of files">
-        {{item.name}}
-      </mat-chip>
-    </mat-chip-list>
-  </div>
-</div>
+</mat-card>
 <input #uploader type="file" accept=".csv, .xml" style="display:none" multiple>
