@@ -47,9 +47,9 @@ export class ParserService {
 				reference: record[j].$.reference,
 				accountNumber: record[j].accountNumber,
 				description: record[j].description,
-				startBalance: record[j].startBalance,
-				endBalance: record[j].endBalance,
-				mutation: record[j].mutation
+				startBalance: parseFloat(record[j].startBalance),
+				endBalance: parseFloat(record[j].endBalance),
+				mutation: parseFloat(record[j].mutation)
 			});
 		}
 		return arr;
@@ -66,9 +66,14 @@ export class ParserService {
 		for (let i = 1; i < lines.length - 1; i++) {
 			const obj = {} as MT940;
 			const currentline = lines[i].split(',');
+			const numerics = ['startBalance', 'endBalance', 'mutation'];
 
 			for (let j = 0; j < headers.length; j++) {
-				obj[headers[j]] = currentline[j];
+				if (numerics.includes(headers[j])) {
+					obj[headers[j]] = parseFloat(currentline[j]);
+				} else {
+					obj[headers[j]] = currentline[j];
+				}
 			}
 			result.push(obj);
 		}

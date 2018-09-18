@@ -2,7 +2,7 @@ export interface MT940 {
 	reference: string;
 	accountNumber: string;
 	startBalance: number;
-	mutation: string;
+	mutation: number;
 	description: string;
 	endBalance: number;
 }
