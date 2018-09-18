@@ -1,11 +1,11 @@
 import {ReadFile} from '@rabo/file/file.model';
-import {MT940} from '@rabo/file/statement.model';
+import {CustomerStatement} from '@rabo/file/statement.model';
 import {FileActions} from '@rabo/file/store/actions';
 
 export interface State {
 	files: ReadFile[];
 	uploadError: string;
-	records: MT940[];
+	records: CustomerStatement[];
 }
 
 const initialState: State = {

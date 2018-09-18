@@ -1,12 +1,7 @@
 import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import {Observable, Subscription} from 'rxjs';
-import {FileReaderService} from '@rabo/file/reader/file-reader.service';
-import {tap, take, mergeMap} from 'rxjs/operators';
-import {ParserService} from '@rabo/file/parser/parser.service';
-import {MT940} from '@rabo/file/statement.model';
 import {ReadFile} from '@rabo/file/file.model';
 import {Store, select} from '@ngrx/store';
-import * as fromFile from '@rabo/file/store/reducers/file.reducer';
 import * as fromRoot from '../../reducers';
 import {FileActions} from '@rabo/file/store/actions';
 import {MatSnackBar} from '@angular/material';

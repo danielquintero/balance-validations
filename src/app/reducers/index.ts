@@ -15,4 +15,5 @@ export const metaReducers: MetaReducer<State>[] = !environment.production ? [] :
 
 export const getFileState = createFeatureSelector<State, fromFile.State>('file');
 export const getFiles = createSelector(getFileState, fromFile.getFiles);
+export const getRecords = createSelector(getFileState, fromFile.getRecords);
 export const getUploadError = createSelector(getFileState, fromFile.getUploadError);
