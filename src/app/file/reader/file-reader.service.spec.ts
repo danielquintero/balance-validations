@@ -2,10 +2,10 @@ import {cold, hot} from 'jasmine-marbles';
 import {FileReaderService} from '@rabo/file/reader/file-reader.service';
 
 describe('FileReaderService', () => {
-	let component: FileReaderService;
+	let service: FileReaderService;
 
 	beforeEach(() => {
-		component = new FileReaderService();
+		service = new FileReaderService();
 	});
 
 	describe('readFilesParallel', () => {
@@ -20,10 +20,10 @@ describe('FileReaderService', () => {
 			readFileFn.and.callFake((file: any) => {
 				return file === 1 ? obs1 : obs2;
 			});
-			component.readFile = readFileFn;
+			service.readFile = readFileFn;
 
 			// Act
-			const result = component.readFilesInParallel([1, 2] as any);
+			const result = service.readFilesInParallel([1, 2] as any);
 
 			// Assert
 			expect(result).toBeObservable(expected);
@@ -43,10 +43,10 @@ describe('FileReaderService', () => {
 			readFileFn.and.callFake((filenumber: any) => {
 				return filenumber === 1 ? obs1 : obs2;
 			});
-			component.readFile = readFileFn;
+			service.readFile = readFileFn;
 
 			// Act
-			const result = component.readFilesAsArray([1, 2] as any);
+			const result = service.readFilesAsArray([1, 2] as any);
 
 			// Assert
 			expect(result).toBeObservable(expected);
@@ -57,16 +57,16 @@ describe('FileReaderService', () => {
 	describe('readFile', () => {
 		it('reads the file and returns it when completed', (done: any) => {
 			// Arrange
-			const readAsDataUrlFn = jasmine.createSpy();
+			const readAsTextFn = jasmine.createSpy();
 			const expectedResult = 'result';
 			const file = {} as any;
 			const reader = {
-				readAsDataURL: readAsDataUrlFn,
+				readAsText: readAsTextFn,
 				result: expectedResult
 			} as any;
 
 			// Act
-			const sub = component.readFile(file, reader);
+			const sub = service.readFile(file, reader);
 
 			// Assert
 			sub.subscribe((result) => {
@@ -74,7 +74,7 @@ describe('FileReaderService', () => {
 				done();
 			});
 			reader.onload();
-			expect(readAsDataUrlFn).toHaveBeenCalledWith(file);
+			expect(readAsTextFn).toHaveBeenCalledWith(file);
 		});
 	});
 });

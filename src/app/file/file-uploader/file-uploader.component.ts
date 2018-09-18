@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
+import {Component, OnInit, ViewChild, ElementRef, OnDestroy} from '@angular/core';
 import {Observable, Subscription} from 'rxjs';
 import {ReadFile} from '@rabo/file/file.model';
 import {Store, select} from '@ngrx/store';
@@ -6,13 +6,12 @@ import * as fromRoot from '../../reducers';
 import {FileActions} from '@rabo/file/store/actions';
 import {MatSnackBar} from '@angular/material';
 
-type ReadAsText = string | ArrayBuffer | null;
 @Component({
 	selector: 'app-file-uploader',
 	templateUrl: './file-uploader.component.html',
 	styleUrls: ['./file-uploader.component.css']
 })
-export class FileUploaderComponent implements OnInit {
+export class FileUploaderComponent implements OnInit, OnDestroy {
 	public files$: Observable<ReadFile[]>;
 	public error$: Observable<string>;
 	@ViewChild('uploader')
@@ -24,13 +23,10 @@ export class FileUploaderComponent implements OnInit {
 
 	public ngOnInit() {
 		this.init();
-		this.subscriptions.add(
-			this.error$.subscribe((err: string) => {
-				if (err) {
-					this.snackBar.open(err);
-				}
-			})
-		);
+	}
+
+	public ngOnDestroy(): void {
+		this.subscriptions.unsubscribe();
 	}
 
 	public uploadFiles() {
@@ -45,5 +41,12 @@ export class FileUploaderComponent implements OnInit {
 		this.subscriptions = new Subscription();
 		this.files$ = this.store.pipe(select(fromRoot.getFiles));
 		this.error$ = this.store.pipe(select(fromRoot.getUploadError));
+		this.subscriptions.add(
+			this.error$.subscribe((err: string) => {
+				if (err) {
+					this.snackBar.open(err);
+				}
+			})
+		);
 	}
 }

@@ -1,16 +1,16 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, OnDestroy} from '@angular/core';
 import {MatSort, MatTableDataSource} from '@angular/material';
 import {Store, select} from '@ngrx/store';
 import * as fromRoot from '../../reducers';
 import {CustomerStatement} from '@rabo/file/statement.model';
-import {Observable} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 
 @Component({
 	selector: 'app-data-table',
 	templateUrl: './data-table.component.html',
 	styleUrls: ['./data-table.component.css']
 })
-export class DataTableComponent implements OnInit {
+export class DataTableComponent implements OnInit, OnDestroy {
 	public records$: Observable<CustomerStatement[]>;
 	public displayedColumns: string[];
 	public dataSource: MatTableDataSource<any>;
@@ -18,9 +18,19 @@ export class DataTableComponent implements OnInit {
 	@ViewChild(MatSort)
 	sort: MatSort;
 
+	private subscriptions: Subscription;
+
 	constructor(private store: Store<fromRoot.State>) {}
 
 	ngOnInit() {
+		this.init();
+	}
+
+	public ngOnDestroy(): void {
+		this.subscriptions.unsubscribe();
+	}
+
+	private init() {
 		this.displayedColumns = [
 			'reference',
 			'accountNumber',
@@ -30,16 +40,15 @@ export class DataTableComponent implements OnInit {
 			'endBalance',
 			'validation'
 		];
-		this.init();
-	}
-
-	private init() {
+		this.subscriptions = new Subscription();
 		this.records$ = this.store.pipe(select(fromRoot.getRecords));
-		this.records$.subscribe((records: CustomerStatement[]) => {
-			if (records) {
-				this.dataSource = new MatTableDataSource(records);
-				this.dataSource.sort = this.sort;
-			}
-		});
+		this.subscriptions.add(
+			this.records$.subscribe((records: CustomerStatement[]) => {
+				if (records) {
+					this.dataSource = new MatTableDataSource(records);
+					this.dataSource.sort = this.sort;
+				}
+			})
+		);
 	}
 }

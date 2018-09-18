@@ -21,7 +21,7 @@ export class FileReaderService {
 	public readFilesAsArray(files: FileList): Observable<ReadFile[]> {
 		const filesArray: File[] = [];
 		for (let i = 0; i < files.length; i++) {
-			filesArray.push(files.item(i));
+			filesArray.push(files[i]);
 		}
 		return forkJoin(filesArray.map((file: File) => this.readFile(file, new FileReader())));
 	}
