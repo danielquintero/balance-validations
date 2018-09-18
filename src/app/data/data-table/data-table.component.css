@@ -9,3 +9,7 @@ table {
 th.mat-sort-header-sorted {
 	color: black;
 }
+
+.error {
+	background-color: rgba(241, 45, 45, 0.4);
+}
