@@ -13,3 +13,6 @@ th.mat-sort-header-sorted {
 .error {
 	background-color: rgba(241, 45, 45, 0.4);
 }
+.success {
+	background-color: rgba(32, 230, 32, 0.4);
+}

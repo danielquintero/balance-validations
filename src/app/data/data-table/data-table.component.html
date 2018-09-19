@@ -3,49 +3,61 @@
   <!-- reference Column -->
   <ng-container matColumnDef="reference">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
-    <td [ngClass]="{'error': !element.validation.isValid}" mat-cell *matCellDef="let element"> {{element.reference}}
+    <td [ngClass]="{'error': !element.validation.isValid, 'success': !!element.validation.isValid}" mat-cell
+      *matCellDef="let element">
+      {{element.reference}}
     </td>
   </ng-container>
 
   <!-- accountNumber Column -->
   <ng-container matColumnDef="accountNumber">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Account Number </th>
-    <td [ngClass]="{'error': !element.validation.isValid}" mat-cell *matCellDef="let element">
+    <td [ngClass]="{'error': !element.validation.isValid, 'success': !!element.validation.isValid}" mat-cell
+      *matCellDef="let element">
       {{element.accountNumber}} </td>
   </ng-container>
 
   <!-- startBalance Column -->
   <ng-container matColumnDef="startBalance">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Start Balance </th>
-    <td [ngClass]="{'error': !element.validation.isValid}" mat-cell *matCellDef="let element"> {{element.startBalance}}
+    <td [ngClass]="{'error': !element.validation.isValid, 'success': !!element.validation.isValid}" mat-cell
+      *matCellDef="let element">
+      {{element.startBalance}}
     </td>
   </ng-container>
 
   <!-- mutation Column -->
   <ng-container matColumnDef="mutation">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Mutation </th>
-    <td [ngClass]="{'error': !element.validation.isValid}" mat-cell *matCellDef="let element"> {{element.mutation}}
+    <td [ngClass]="{'error': !element.validation.isValid, 'success': !!element.validation.isValid}" mat-cell
+      *matCellDef="let element">
+      {{element.mutation}}
     </td>
   </ng-container>
 
   <!-- description Column -->
   <ng-container matColumnDef="description">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
-    <td [ngClass]="{'error': !element.validation.isValid}" mat-cell *matCellDef="let element"> {{element.description}}
+    <td [ngClass]="{'error': !element.validation.isValid, 'success': !!element.validation.isValid}" mat-cell
+      *matCellDef="let element">
+      {{element.description}}
     </td>
   </ng-container>
 
   <!-- mutation Column -->
   <ng-container matColumnDef="endBalance">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> End Balance </th>
-    <td [ngClass]="{'error': !element.validation.isValid}" mat-cell *matCellDef="let element"> {{element.endBalance}}
+    <td [ngClass]="{'error': !element.validation.isValid, 'success': !!element.validation.isValid}" mat-cell
+      *matCellDef="let element">
+      {{element.endBalance}}
     </td>
   </ng-container>
 
   <!-- validation -->
   <ng-container matColumnDef="validation">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Validity </th>
-    <td [ngClass]="{'error': !element.validation.isValid}" mat-cell *matCellDef="let element">
+    <td [ngClass]="{'error': !element.validation.isValid, 'success': !!element.validation.isValid}" mat-cell
+      *matCellDef="let element">
       {{element.validation.isValid ? 'Valid' : element.validation.errors}} </td>
   </ng-container>
 
