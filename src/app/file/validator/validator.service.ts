@@ -40,9 +40,9 @@ export class StatementValidatorService {
 			}
 
 			if (sign === 1) {
-				isValid = startBalance + mutation === endBalance;
+				isValid = Math.round((startBalance + mutation) * 100) / 100 === endBalance;
 			} else if (sign === -1) {
-				isValid = startBalance - Math.abs(mutation) === endBalance;
+				isValid = Math.round((startBalance - Math.abs(mutation)) * 100) / 100 === endBalance;
 			}
 
 			if (isValid) {
