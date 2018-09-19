@@ -3,7 +3,7 @@ import {Actions, Effect, ofType} from '@ngrx/effects';
 import {FileReaderService} from '@rabo/file/reader/file-reader.service';
 import {ParserService} from '@rabo/file/parser/parser.service';
 import {FileActions} from '@rabo/file/store/actions';
-import {map, mergeMap, switchMap, tap, catchError} from 'rxjs/operators';
+import {map, mergeMap, tap, catchError} from 'rxjs/operators';
 import {of, from} from 'rxjs';
 import {ReadFile} from '@rabo/file/file.model';
 import {MT940} from '@rabo/file/statement.model';
