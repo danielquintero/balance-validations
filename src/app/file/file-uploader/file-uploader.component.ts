@@ -13,7 +13,8 @@ import {MatSnackBar} from '@angular/material';
 })
 export class FileUploaderComponent implements OnInit, OnDestroy {
 	public files$: Observable<ReadFile[]>;
-	public error$: Observable<string>;
+	public uploadError$: Observable<string>;
+	public validationError$: Observable<string>;
 	@ViewChild('uploader')
 	public uploader: ElementRef<HTMLInputElement>;
 
@@ -40,9 +41,17 @@ export class FileUploaderComponent implements OnInit, OnDestroy {
 	private init() {
 		this.subscriptions = new Subscription();
 		this.files$ = this.store.pipe(select(fromRoot.getFiles));
-		this.error$ = this.store.pipe(select(fromRoot.getUploadError));
+		this.uploadError$ = this.store.pipe(select(fromRoot.getUploadError));
+		this.validationError$ = this.store.pipe(select(fromRoot.getValidationError));
 		this.subscriptions.add(
-			this.error$.subscribe((err: string) => {
+			this.uploadError$.subscribe((err: string) => {
+				if (err) {
+					this.snackBar.open(err);
+				}
+			})
+		);
+		this.subscriptions.add(
+			this.validationError$.subscribe((err: string) => {
 				if (err) {
 					this.snackBar.open(err);
 				}

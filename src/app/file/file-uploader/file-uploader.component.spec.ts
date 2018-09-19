@@ -49,6 +49,6 @@ describe('FileUploaderComponent', () => {
 		component['subscriptions'] = new Subscription();
 		const fileMock = [{name: 'text/csv'}, {name: 'text/xml'}] as ReadFile[];
 		component.files$ = of(fileMock);
-		component.error$ = of(null);
+		component.uploadError$ = of(null);
 	};
 });

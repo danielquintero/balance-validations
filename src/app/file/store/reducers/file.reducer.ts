@@ -4,14 +4,16 @@ import {FileActions} from '@rabo/file/store/actions';
 
 export interface State {
 	files: ReadFile[];
-	uploadError: string;
 	records: CustomerStatement[];
+	uploadError: string;
+	validationError: string;
 }
 
-const initialState: State = {
+export const initialState: State = {
 	files: [],
+	records: [],
 	uploadError: null,
-	records: []
+	validationError: null
 };
 
 export function reducer(state: State = initialState, action: FileActions.FileActionsUnion): State {
@@ -19,6 +21,7 @@ export function reducer(state: State = initialState, action: FileActions.FileAct
 		case FileActions.FileActionTypes.UploadSuccess:
 			return {
 				...state,
+				uploadError: null,
 				files: action.payload
 			};
 
@@ -31,12 +34,14 @@ export function reducer(state: State = initialState, action: FileActions.FileAct
 		case FileActions.FileActionTypes.ValidateSuccess:
 			return {
 				...state,
+				validationError: null,
 				records: action.payload
 			};
 
 		case FileActions.FileActionTypes.ValidateFailure:
 			return {
-				...state
+				...state,
+				validationError: action.payload
 			};
 
 		default:
@@ -46,4 +51,5 @@ export function reducer(state: State = initialState, action: FileActions.FileAct
 
 export const getFiles = (state: State) => state.files;
 export const getUploadError = (state: State) => state.uploadError;
+export const getValidationError = (state: State) => state.validationError;
 export const getRecords = (state: State) => state.records;
