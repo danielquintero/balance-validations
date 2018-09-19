@@ -50,7 +50,7 @@ export class StatementValidatorService {
 			}
 			// set record validity to false
 			record.validation.isValid = false;
-			const error = 'End Balance is incorrect, wrong mutation applied';
+			const error = 'End Balance is incorrect';
 			validation.errors && validation.errors.length > 0
 				? record.validation.errors.push(error)
 				: (record.validation.errors = [error]);
