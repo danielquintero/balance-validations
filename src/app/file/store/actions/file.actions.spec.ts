@@ -1,6 +1,7 @@
 import {FileActions} from '@rabo/file/store/actions';
 import {UploadSuccess, Validate} from './file.actions';
 import {ReadFile} from '@rabo/file/file.model';
+import {CustomerStatement} from '@rabo/file/statement.model';
 describe('Upload', () => {
 	it('creats an upload action', () => {
 		// Arrange
@@ -70,7 +71,7 @@ describe('ValidateSuccess', () => {
 					isValid: true
 				}
 			}
-		];
+		] as CustomerStatement[];
 		// Act
 		const action = new FileActions.ValidateSuccess(payload);
 		// Assert
