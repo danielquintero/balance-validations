@@ -15,7 +15,7 @@ export class DataTableComponent implements OnInit, OnDestroy {
 	public displayedColumns: string[];
 	public dataSource: MatTableDataSource<any>;
 
-	@ViewChild(MatSort)
+	@ViewChild(MatSort, {static: true})
 	sort: MatSort;
 
 	private subscriptions: Subscription;

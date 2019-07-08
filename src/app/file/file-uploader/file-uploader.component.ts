@@ -15,7 +15,7 @@ export class FileUploaderComponent implements OnInit, OnDestroy {
 	public files$: Observable<ReadFile[]>;
 	public uploadError$: Observable<string>;
 	public validationError$: Observable<string>;
-	@ViewChild('uploader')
+	@ViewChild('uploader', {static: true})
 	public uploader: ElementRef<HTMLInputElement>;
 
 	private subscriptions: Subscription;
