@@ -24,11 +24,13 @@
             ],
             "styles": [
               {
-                "input": "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+                "input": "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+                "inject": true
               },
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "aot": true
           },
           "configurations": {
             "production": {
@@ -40,13 +42,17 @@
               ],
               "optimization": true,
               "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": true
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ]
             }
           }
         },
@@ -76,7 +82,8 @@
             "karmaConfig": "src/karma.conf.js",
             "styles": [
               {
-                "input": "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+                "input": "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+                "inject": true
               },
               "src/styles.css"
             ],

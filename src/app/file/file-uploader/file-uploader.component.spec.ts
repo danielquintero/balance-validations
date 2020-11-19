@@ -1,6 +1,6 @@
 import {FileUploaderComponent} from './file-uploader.component';
 import {Store} from '@ngrx/store';
-import {MatSnackBar} from '@angular/material';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {of, Subscription} from 'rxjs';
 import {ReadFile} from '../file.model';
 

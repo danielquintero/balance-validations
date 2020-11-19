@@ -1,14 +1,12 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {
-	MatButtonModule,
-	MatCardModule,
-	MatTableModule,
-	MatToolbarModule,
-	MatIconModule,
-	MatChipsModule,
-	MatSnackBarModule
-} from '@angular/material';
+import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatIconModule} from '@angular/material/icon';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatTableModule} from '@angular/material/table';
+import {MatToolbarModule} from '@angular/material/toolbar';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';

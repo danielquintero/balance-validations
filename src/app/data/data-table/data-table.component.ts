@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewChild, OnDestroy} from '@angular/core';
-import {MatSort, MatTableDataSource} from '@angular/material';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
 import {Store, select} from '@ngrx/store';
 import * as fromRoot from '../../reducers';
 import {CustomerStatement} from '@rabo/file/statement.model';

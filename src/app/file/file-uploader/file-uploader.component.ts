@@ -4,7 +4,7 @@ import {ReadFile} from '@rabo/file/file.model';
 import {Store, select} from '@ngrx/store';
 import * as fromRoot from '../../reducers';
 import {FileActions} from '@rabo/file/store/actions';
-import {MatSnackBar} from '@angular/material';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
 	selector: 'app-file-uploader',
