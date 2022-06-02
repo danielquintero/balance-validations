@@ -7,7 +7,7 @@
     "@angular/cdk": "^11.0.0",
     "@angular/common": "^11.0.1",
     "@angular/compiler": "^11.0.1",
-    "@angular/core": "^11.0.1",
+    "@angular/core": "^11.0.5",
     "@angular/flex-layout": "^8.0.0-beta.26",
     "@angular/forms": "^11.0.1",
     "@angular/http": "^7.2.16",
